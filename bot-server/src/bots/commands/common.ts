@@ -5,6 +5,7 @@ import bot from "../bot";
 import { prisma } from "../../config/prisma";
 // import runEcsTask, { params } from "../../utils/ecs";
 import { PROJECT_TYPES } from "../../utils/constants";
+import runEcsTask from "../../utils/ecs";
 
 bot.on('text', async (ctx) => {
     // If deploying
@@ -35,6 +36,7 @@ bot.on('text', async (ctx) => {
             }
 
             // Run ECS task
+            runEcsTask(isExistingProject.project_type, isExistingProject.dependency_install_command || '', isExistingProject.build_command || '', isExistingProject.build_directory || '');
 
             return ctx.reply(
                 deploying_project_template(isExistingProject.name as string, isExistingProject.project_id, isExistingProject.git_url, isExistingProject.slug, DeploymentStatus.PENDING, isExistingProject.project_type), { parse_mode: 'HTML' }
@@ -124,6 +126,7 @@ bot.on('text', async (ctx) => {
             }
 
             // Run ECS task
+            runEcsTask(createdProject.project_type, createdProject.dependency_install_command || '', createdProject.build_command || '', createdProject.build_directory || '');
 
             return ctx.reply(
                 deploying_project_template(projectName as string, projectId, gitUrl, slug, DeploymentStatus.PENDING, projectType as string), { parse_mode: 'HTML' }
