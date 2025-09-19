@@ -69,59 +69,65 @@ The project follows a microservices architecture with the following key componen
 
 ### Directory Structure
 BhaiDeployKarDe/
-├── bot-server/                 # Telegram Bot Service
-│   ├── src/
-│   │   ├── bots/               # Bot command handlers
-│   │   │   ├── commands/       # Bot command implementations
-│   │   │   └── bot.ts          # Bot initialization
-│   │   ├── config/             # Configuration files
-│   │   ├── controllers/        # Business logic
-│   │   ├── utils/              # Helper functions
-│   │   ├── kafka/              # Kafka producers/consumers
-│   │   └── index.ts            # Express app setup
-│   ├── prisma/                 # Database schema and migrations
-│   │   ├── schema.prisma       # Prisma schema
-│   │   └── migrations/         # Database migrations
-│   ├── .env                    # Environment variables
-│   ├── Dockerfile
-│   ├── package.json
-│   └── tsconfig.json
-├── build-server/               # Build & Deploy Service
-│   ├── src/
-│   │   ├── config/             # Build configurations
-│   │   ├── kafka/              # Kafka event handlers
-│   │   └── utils/              # Build utilities
-│   │   └── index.ts            # Express app setup
-│   ├── Dockerfile
-│   ├── package.json
-│   └── tsconfig.json
-├── log-server/                 # Logging Service & UI
-│   ├── src/
-│   │   ├── config/             # Logging configurations
-│   │   ├── controllers/        # Log handling logic
-│   │   ├── utils/              # Logging utilities
-│   │   ├── migrations/         # Clickhouse migrations
-│   │   ├── schema/             # Clickhouse schema
-│   │   └── index.ts            # Express app setup
-│   ├── .env                    # Environment variables
-│   ├── Dockerfile
-│   ├── package.json
-│   └── tsconfig.json
-├── reverse-proxy/              # Reverse Proxy Service
-│   ├── src/
-│   │   ├── config/             # Proxy configurations
-│   │   └── index.ts            # Express app setup
-│   ├── .env                    # Environment variables
-│   ├── Dockerfile
-│   ├── package.json
-│   └── tsconfig.json
-├── envs/                       # Environment Files
-│   ├── clickhouse.env          # ClickHouse config
-│   └── postgres.env            # PostgreSQL config
-├── consul/                     # Consul Service Discovery
-│   └── bot-server.json         # Bot server configurations
-│   └── log-server.json         # Log server configurations
-└── docker-compose.yaml         # Service orchestration
+├── bot-server/ # Telegram Bot Service
+│ ├── src/
+│ │ ├── bots/ # Bot command handlers
+│ │ │ ├── commands/ # Bot command implementations
+│ │ │ └── bot.ts # Bot initialization
+│ │ ├── config/ # Configuration files
+│ │ ├── controllers/ # Business logic
+│ │ ├── utils/ # Helper functions
+│ │ ├── kafka/ # Kafka producers/consumers
+│ │ └── index.ts # Express app setup
+│ ├── prisma/ # Database schema and migrations
+│ │ ├── schema.prisma # Prisma schema
+│ │ └── migrations/ # Database migrations
+│ ├── .env # Environment variables
+│ ├── Dockerfile
+│ ├── package.json
+│ └── tsconfig.json
+│
+├── build-server/ # Build & Deploy Service
+│ ├── src/
+│ │ ├── config/ # Build configurations
+│ │ ├── kafka/ # Kafka event handlers
+│ │ ├── utils/ # Build utilities
+│ │ └── index.ts # Express app setup
+│ ├── Dockerfile
+│ ├── package.json
+│ └── tsconfig.json
+│
+├── log-server/ # Logging Service & UI
+│ ├── src/
+│ │ ├── config/ # Logging configurations
+│ │ ├── controllers/ # Log handling logic
+│ │ ├── utils/ # Logging utilities
+│ │ ├── migrations/ # ClickHouse migrations
+│ │ ├── schema/ # ClickHouse schema
+│ │ └── index.ts # Express app setup
+│ ├── .env # Environment variables
+│ ├── Dockerfile
+│ ├── package.json
+│ └── tsconfig.json
+│
+├── reverse-proxy/ # Reverse Proxy Service
+│ ├── src/
+│ │ ├── config/ # Proxy configurations
+│ │ └── index.ts # Express app setup
+│ ├── .env # Environment variables
+│ ├── Dockerfile
+│ ├── package.json
+│ └── tsconfig.json
+│
+├── envs/ # Environment Files
+│ ├── clickhouse.env # ClickHouse config
+│ └── postgres.env # PostgreSQL config
+│
+├── consul/ # Consul Service Discovery
+│ ├── bot-server.json # Bot server configurations
+│ └── log-server.json # Log server configurations
+│
+└── docker-compose.yaml # Service orchestration
 
 ## 🔧 Design Patterns
 
