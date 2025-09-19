@@ -57,7 +57,7 @@ app.get('/project', async (req, res) => {
     const reverse_proxy_url = new URL(ServerConfig.REVERSE_PROXY_SERVER_URL);
     reverse_proxy_url.hostname = `${project_id}.${reverse_proxy_url.hostname}`;
 
-    res.render('logs', { project_id, build_id, live_url: reverse_proxy_url });
+    res.render('logs', { project_id, build_id, live_url: reverse_proxy_url, error: null });
 });
 
 app.get('/health', (req, res) => {
