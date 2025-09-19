@@ -68,7 +68,6 @@ The project follows a microservices architecture with the following key componen
    - Provides security layer for services
 
 ### Directory Structure
-\`\`\`plaintext
 BhaiDeployKarDe/
 ├── bot-server/                 # Telegram Bot Service
 │   ├── src/
@@ -123,7 +122,6 @@ BhaiDeployKarDe/
 │   └── bot-server.json         # Bot server configurations
 │   └── log-server.json         # Log server configurations
 └── docker-compose.yaml         # Service orchestration
-\`\`\`
 
 ## 🔧 Design Patterns
 
