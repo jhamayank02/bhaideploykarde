@@ -1,0 +1,30 @@
+{
+  "name": "bhaideploykarde",
+  "version": "1.0.0",
+  "description": "A bot similar to your coder bro, who can quickly deploy your projects to showcase them to the world",
+  "license": "ISC",
+  "author": "Mayank Jha",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "start": "node dist/index.js",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.1.0",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@types/http-proxy": "^1.17.16",
+    "dotenv": "^17.2.0",
+    "express": "^5.1.0",
+    "http-proxy": "^1.18.1",
+    "winston": "^3.17.0",
+    "winston-daily-rotate-file": "^5.0.0"
+  }
+}

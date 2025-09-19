@@ -1,0 +1,1 @@
+ALTER TABLE build_logs DROP COLUMN status;

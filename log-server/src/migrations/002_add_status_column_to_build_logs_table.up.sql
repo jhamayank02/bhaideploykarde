@@ -1,0 +1,1 @@
+ALTER TABLE build_logs ADD COLUMN status varchar(100);

@@ -1,0 +1,37 @@
+# Dependency directories
+node_modules
+npm-debug.log
+yarn-error.log
+.pnpm-store
+
+# Build output
+dist
+build
+coverage
+
+# Logs
+logs
+*.log
+
+# Environment files
+.env
+.env.*.local
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Git files
+.git
+.gitignore
+
+# Editor/IDE config
+.vscode
+.idea
+
+# Test output
+test-output
+
+# Optional: Docker-related
+Dockerfile.dev
+docker-compose*.yml

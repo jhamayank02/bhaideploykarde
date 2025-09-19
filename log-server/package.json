@@ -1,0 +1,39 @@
+{
+  "name": "bhaideploykarde",
+  "version": "1.0.0",
+  "description": "A bot similar to your coder bro, who can quickly deploy your projects to showcase them to the world",
+  "license": "ISC",
+  "author": "Mayank Jha",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --watch src --ext ts --exec \"node --loader ts-node/esm src/index.ts\"",
+    "start": "node dist/index.js",
+    "build": "tsc",
+    "db-migrate-up": "type .\\src\\migrations\\*.up.sql | docker exec -i clickhouse_server clickhouse-client --multiquery",
+    "db-migrate-down": "type .\\src\\migrations\\*.down.sql | docker exec -i clickhouse_server clickhouse-client --multiquery",
+    "db-generate-schema": "dotenv -e ..\\envs\\clickhouse.env npx hypequery-generate-types --host $CLICKHOUSE_HOST --database $CLICKHOUSE_DATABASE --username $CLICKHOUSE_USER --password $CLICKHOUSE_PASSWORD"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.1.0",
+    "dotenv-cli": "^10.0.0",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@hypequery/clickhouse": "^1.2.9",
+    "@types/opossum": "^8.1.9",
+    "dotenv": "^17.2.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "kafkajs": "^2.2.4",
+    "node-fetch": "^3.3.2",
+    "opossum": "^9.0.0",
+    "socket.io": "^4.8.1",
+    "ts-node-dev": "^2.0.0",
+    "winston": "^3.17.0",
+    "winston-daily-rotate-file": "^5.0.0"
+  }
+}

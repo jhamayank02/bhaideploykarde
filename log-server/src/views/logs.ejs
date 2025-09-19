@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BhaiDeployKarDe - Realtime Project Deployment Logs</title>
+    <style>
+        body {
+            font-family: monospace, sans-serif;
+            background: #111;
+            color: #0f0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #fff;
+        }
+
+        #logs {
+            background: #000;
+            padding: 15px;
+            border-radius: 8px;
+            height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            user-select: none;
+        }
+        #error{
+            color: red
+        }
+
+        .INFO {
+            color: green;
+        }
+
+        .ERROR {
+            color: red
+        }
+
+        .WARN {
+            color: yellow
+        }
+
+        .log {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Deployment Logs [<span id="deployment-status">FETCHING...</span>]</h1>
+    <h3>Project ID - <%= project_id%></h3>
+    <h3>Build ID - <%= build_id%></h3>
+    <% if (error) { %>
+        <h3 id="error">Error - <%= error %></h3>
+    <% } else { %>
+        <h3>
+        Live URL - <a href="<%= live_url %>" target="_blank"><%= live_url %></a>
+        </h3>
+    <% } %>
+    <div id="logs"></div>
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+
+    function formatHtml(level, timestamp, log_message) {
+        return `<p class="log"><strong>${new Date(timestamp).toLocaleString()}</strong>: <strong class="${level}">${level}</strong>: ${log_message}</p>`;
+    }
+
+    var socket = io();
+
+    const logs_container = document.getElementById("logs");
+    const deployment_status = document.getElementById("deployment-status");
+    const project_id = "<%= project_id %>";
+    const build_id = "<%= build_id %>";
+    const error = "<%= error %>";
+
+    if (project_id && build_id && !error) {
+        socket.emit("log-query", { project_id, build_id });
+    }
+
+    socket.on('log-response', (data) => {
+        for (const log of data.logs) {
+            if (log.status !== undefined && log.status !== deployment_status.innerHTML) {
+                deployment_status.innerHTML = log.status;
+            }
+            logs_container.innerHTML += formatHtml(log.level, log.timestamp, log.log_message);
+            logs_container.scrollTop = logs_container.scrollHeight;
+        }
+    });
+</script>
+
+</html>

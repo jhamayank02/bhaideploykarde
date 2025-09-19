@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int       @id @default(autoincrement())
+  first_name String
+  last_name  String?
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  user_id    BigInt    @unique
+  Project    Project[]
+
+  @@map("user")
+}
+
+model Project {
+  id                         Int         @id @default(autoincrement())
+  name                       String
+  slug                       String      @unique
+  git_url                    String
+  user_id                    Int
+  project_type               ProjectType
+  build_command              String?
+  dependency_install_command String?
+  build_directory            String?
+  created_at                 DateTime    @default(now())
+  updated_at                 DateTime    @updatedAt
+  project_id                 String      @unique
+
+  Deployment Deployment[]
+  User       User         @relation(fields: [user_id], references: [id])
+
+  @@map("project")
+}
+
+model Deployment {
+  id         Int              @id @default(autoincrement())
+  status     DeploymentStatus @default(PENDING)
+  project_id Int
+  created_at DateTime         @default(now())
+  updated_at DateTime         @updatedAt
+  Project    Project          @relation(fields: [project_id], references: [id])
+
+  @@map("deployment")
+}
+
+enum DeploymentStatus {
+  PENDING
+  QUEUED
+  IN_PROGRESS
+  DEPLOYED
+  FAILED
+}
+
+enum ProjectType {
+  STATIC_WEBSITE
+  REACT_JS
+  VUE_JS
+  ANGULAR_JS
+}
