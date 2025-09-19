@@ -129,6 +129,7 @@ BhaiDeployKarDe/
 │ └── log-server.json # Log server configurations
 │
 └── docker-compose.yaml # Service orchestration
+```
 
 ## 🔧 Design Patterns
 
