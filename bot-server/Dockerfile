@@ -8,8 +8,6 @@ COPY package.json .
 
 RUN npm install
 
-RUN npx prisma migrate dev
-
 RUN npx prisma generate
 
 COPY . .
@@ -18,4 +16,5 @@ RUN npx tsc
 
 EXPOSE 9000
 
-ENTRYPOINT [ "node", "dist/index.js" ]
+# Start the app (migrations should run at container start, not build)
+CMD npx prisma migrate deploy && node dist/index.js
