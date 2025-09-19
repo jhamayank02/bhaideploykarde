@@ -29,6 +29,7 @@ type ServerConfigType = {
     ECS_ASSIGN_PUBLIC_IP: "ENABLED" | "DISABLED"
     ECS_SUBNETS: string;
     ECS_SECURITY_GROUPS: string;
+    REVERSE_PROXY_URL: string;
 }
 
 const checkEnvVar = (name: string, fallback?: string): string => {
@@ -71,7 +72,8 @@ const ServerConfig: ServerConfigType = {
     ECS_COUNT: Number(process.env.ECS_COUNT),
     ECS_ASSIGN_PUBLIC_IP: checkEnvVar("ECS_ASSIGN_PUBLIC_IP") as "ENABLED" | "DISABLED",
     ECS_SUBNETS: checkEnvVar("ECS_SUBNETS"),
-    ECS_SECURITY_GROUPS: checkEnvVar("ECS_SECURITY_GROUPS")
+    ECS_SECURITY_GROUPS: checkEnvVar("ECS_SECURITY_GROUPS"),
+    REVERSE_PROXY_URL: checkEnvVar("REVERSE_PROXY_URL")
 }
 
 export default ServerConfig;

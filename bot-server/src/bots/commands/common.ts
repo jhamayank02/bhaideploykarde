@@ -6,6 +6,7 @@ import { prisma } from "../../config/prisma";
 // import runEcsTask, { params } from "../../utils/ecs";
 import { PROJECT_TYPES } from "../../utils/constants";
 import runEcsTask from "../../utils/ecs";
+import ServerConfig from "../../config/serverConfig";
 
 bot.on('text', async (ctx) => {
     // If deploying
@@ -38,8 +39,11 @@ bot.on('text', async (ctx) => {
             // Run ECS task
             runEcsTask(isExistingProject.project_type, isExistingProject.dependency_install_command || '', isExistingProject.build_command || '', isExistingProject.build_directory || '');
 
+            const live_url = new URL(ServerConfig.REVERSE_PROXY_URL);
+            live_url.hostname = isExistingProject.project_id + '.' + live_url.hostname;
+
             return ctx.reply(
-                deploying_project_template(isExistingProject.name as string, isExistingProject.project_id, isExistingProject.git_url, isExistingProject.slug, DeploymentStatus.PENDING, isExistingProject.project_type), { parse_mode: 'HTML' }
+                deploying_project_template(isExistingProject.name as string, isExistingProject.project_id, deployment.id, isExistingProject.git_url, String(live_url), DeploymentStatus.PENDING, isExistingProject.project_type), { parse_mode: 'HTML' }
             );
         }
         else if (ctx.session.deployment.step === "projectName") {
@@ -58,7 +62,7 @@ bot.on('text', async (ctx) => {
             if (isNaN(selectedOption) || selectedOption <= 0 || selectedOption > projectTypes.length) {
                 return ctx.reply('❌ Invalid option.');
             }
-            ctx.session.deployment.projectType = projectTypes[selectedOption-1][1];
+            ctx.session.deployment.projectType = projectTypes[selectedOption - 1][1];
             if (ctx.session.deployment.projectType === 'STATIC_WEBSITE') {
                 ctx.session.deployment.step = 'gitUrl';
                 return ctx.reply('🔗 Now send your GitHub repo URL:');
@@ -127,9 +131,12 @@ bot.on('text', async (ctx) => {
 
             // Run ECS task
             runEcsTask(createdProject.project_type, createdProject.dependency_install_command || '', createdProject.build_command || '', createdProject.build_directory || '');
+           
+            const live_url = new URL(ServerConfig.REVERSE_PROXY_URL);
+            live_url.hostname = createdProject.project_id + '.' + live_url.hostname;
 
             return ctx.reply(
-                deploying_project_template(projectName as string, projectId, gitUrl, slug, DeploymentStatus.PENDING, projectType as string), { parse_mode: 'HTML' }
+                deploying_project_template(projectName as string, projectId, deployment.id, gitUrl, String(live_url), DeploymentStatus.PENDING, projectType as string), { parse_mode: 'HTML' }
             );
         }
     }

@@ -42,14 +42,15 @@ Here are the commands you can use with DevLaunch Bot:
 `
 };
 
-export const deploying_project_template = (projectName: string, projectId: string, gitUrl: string, slug: string, status: string, projectType: string): string => {
+export const deploying_project_template = (projectName: string, projectId: string, buildId: number, gitUrl: string, live_url: string, status: string, projectType: string): string => {
     return (
         `🚀 <b>Deployment Started!</b>\n\n` +
         `📦 <b>Project:</b> ${projectName}\n` +
         `🆔 <b>Project ID:</b> ${projectId}\n` +
+        `🏗️ <b>Build ID:</b> ${buildId}\n` +
         `❓ <b>Project Type:</b> ${projectType}\n\n` +
         `🔗 <b>GitHub Repo:</b> <a href="${gitUrl}">${gitUrl}</a>\n` +
-        `🌍 <b>Live URL:</b> <a href="https://${slug}.yourdomain.com">https://${slug}.yourdomain.com</a>\n` +
+        `🌍 <b>Live URL:</b> <a href="${live_url}">${live_url}</a>\n` +
         `⏰ <b>Current Status:</b> ${status}\n\n` +
         `⏳ Your project is being deployed. You'll be able to access it shortly!`
     );
