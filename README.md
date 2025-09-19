@@ -68,6 +68,7 @@ The project follows a microservices architecture with the following key componen
    - Provides security layer for services
 
 ### Directory Structure
+```plaintext
 BhaiDeployKarDe/
 ├── bot-server/ # Telegram Bot Service
 │ ├── src/
