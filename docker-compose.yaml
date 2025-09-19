@@ -64,7 +64,6 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
       - "api.telegram.org:149.154.167.220"
-      - "api.telegram.org:149.154.167.220"
 
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
