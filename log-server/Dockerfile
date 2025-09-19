@@ -12,4 +12,4 @@ RUN npx tsc
 
 EXPOSE 9000
 
-ENTRYPOINT [ "node", "dist/index.js" ]
+CMD npx run db-migrate-up && node dist/index.js

@@ -16,5 +16,4 @@ RUN npx tsc
 
 EXPOSE 9000
 
-# Start the app (migrations should run at container start, not build)
 CMD npx prisma migrate deploy && node dist/index.js
