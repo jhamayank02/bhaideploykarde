@@ -100,7 +100,7 @@ bot.on('text', async (ctx) => {
             ctx.session.deployment = {};
 
             const slug = generateSlug();
-            const projectId = projectName?.split(' ').join("-") + "@" + slug;
+            const projectId = projectName?.split(' ').join("-") + "-" + slug;
 
             const createdProject = await prisma.project.create({
                 data: {
